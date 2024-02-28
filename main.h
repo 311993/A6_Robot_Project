@@ -13,6 +13,8 @@ class DriveRoutes{
     int startToKiosk();
   private:
     Drivetrain drivetrain;
+    int substep = 0;
+    long subTimeStamp = 0;
 };
 
 class TaskSequences{

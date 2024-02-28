@@ -18,9 +18,10 @@ const char teamKey = '6';
 
     int x = 0, y = 0;
     while(!LCD.Touch(&x,&y)){}
+    //while(!sensors.isLight(){}
 
     while(TimeNowMSec() - startTime < MAX_TIME){
-        LCD.WriteLine(sensors.getAvgColor());
+        //LCD.WriteLine(step);
         if(timeStep != step){
             timeStep = step;
             timeStamp = TimeNowMSec();
@@ -31,16 +32,20 @@ const char teamKey = '6';
                 step = initialize();
             break;
             case 1:
-                step += drivetrain.turnLeft(1800);
-
-                /*if(TimeNowMSec() - timeStamp > 5000){
-                    step++;
-
-                }*/
+                //step += drivetrain.driveDistance(12);
+                //step++;
+                step = routes.startToKiosk();
             break;
             case 2:
-                drivetrain.stop();
-                //routes.startToKiosk();
+                /*drivetrain.drivePrimitive(-50, 50);
+                 if(TimeNowMSec() - timeStamp > 5000){
+                    step++;
+
+                }
+                //drivetrain.stop();*/
+            break;
+            case 3:
+                //drivetrain.stop();
             break;
         }
 

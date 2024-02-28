@@ -6,7 +6,7 @@ using namespace std;
 
 const static double RP = 1, LP = 1.54, RK = 0, LK = 0;
 const static double SPD = 50;
-const static double DEGREES_TO_MSEC = 5000/585, INCHES_TO_MSEC = 10000/113.0;
+const static double DEGREES_TO_MSEC = 5000/580, INCHES_TO_MSEC = 10000/114.0;
 
 class Drivetrain{
   public:

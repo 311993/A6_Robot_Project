@@ -1,8 +1,5 @@
 #include <main.h>
 
-int substep = 0;
-long subTimeStamp = 0;
-
 /*
 55r
 5
@@ -16,6 +13,8 @@ long subTimeStamp = 0;
 
 DriveRoutes::DriveRoutes(Drivetrain drivetrain){
    this->drivetrain = drivetrain;
+   substep = 0;
+   subTimeStamp = 0;
 }
 
 int DriveRoutes::startToKiosk(){
@@ -40,12 +39,11 @@ int DriveRoutes::startToKiosk(){
             substep += drivetrain.driveDistance(11);
         break;
         case 6:
-            substep += drivetrain.turnRight(90);
+            substep += drivetrain.turnRight(80);
         break;
         case 7:
-            substep += drivetrain.driveUnbounded();
+            substep += drivetrain.driveDistance(24);
         break;
     } 
-
-    return 0;
+    return (substep == 8) ? 2 : 1;
 }
