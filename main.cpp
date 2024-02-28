@@ -4,6 +4,9 @@ int step = 0, timeStep = 0;
 long startTime = TimeNowMSec(), timeStamp = TimeNowMSec();
 const long MAX_TIME = 1000 * 120;
 
+int leverNo;
+const char teamKey;
+
 int main(void){
 
     int x = 0, y = 0;
@@ -32,6 +35,6 @@ int main(void){
 }
 
 int initialize(){
-
+    RCS.InitializeTouchMenu(&teamKey);
     return 1;
 }

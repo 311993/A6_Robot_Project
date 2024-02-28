@@ -1,8 +1,9 @@
 #pragma once
 #include <forklift.h>
 #include <drivetrain.h>
-#include <sensors.h>
+#include <sensor.h>
 #include <FEHLCD.h>
+#include <FEHRCS.h>
 
 using namespace std;
 

@@ -7,6 +7,10 @@ using namespace std;
 FEHMotor motorL(FEHMotor::Motor0, 7.2);
 FEHMotor motorR(FEHMotor::Motor1, 7.2);
 
+const static double RP, LP, RK, LK;
+const static double FULL_SPEED;
+const static double DEGREES_TO_MSEC, INCHES_TO_MSEC;
+
 class Drivetrain{
   public:
     static int driveUnbounded(double spd){}
@@ -16,8 +20,5 @@ class Drivetrain{
     static int stop(void);
   private:  
     static void drivePrimitive(double rlSpd, double rSpd){}
-    const static double RP, LP, RK, LK;
-    const static double FULL_SPEED;
-    const static double DEGREES_TO_MSEC, INCHES_TO_MSEC;
     static long timeStamp;
 };
