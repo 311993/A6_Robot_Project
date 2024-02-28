@@ -1,4 +1,6 @@
 #pragma once
+#include <FEHServo.h>
+#include <FEHUtility.h>
 
 using namespace std;
 
