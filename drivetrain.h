@@ -1,25 +1,36 @@
 #pragma once
 #include <FEHMotor.h>
 #include <FEHUtility.h>
+#include <sensor.h>
 
 using namespace std;
 
-const static double RP = 1, LP = 1.54, RK = 0, LK = 0;
-const static double SPD = 50;
-const static double DEGREES_TO_MSEC = 5000/580, INCHES_TO_MSEC = 10000/114.0;
+#define RP 1
+#define LP 1.28
+#define RK 0
+#define LK 0
+#define SPD 50
+#define DEGREES_TO_MSEC 5000/447.0 * 390/315.0
+#define INCHES_TO_MSEC 10000/78.0
 
 class Drivetrain{
   public:
     int driveUnbounded();
+    int wait(double mSec);
     int driveDistance(double dist);
+    int driveBack(double dist);
     int turnLeft(double deg);
     int turnRight(double deg);
+    int followLine();
+    int driveUntilLine();
+    int driveUntilBump();
     int stop(void);
     void drivePrimitive(double rlSpd, double rSpd);
-    explicit Drivetrain();
+    Drivetrain(Sensors sensors);
     
   private:  
     FEHMotor motorL;
     FEHMotor motorR;
+    Sensors sensors;
     long timeStamp;
 };

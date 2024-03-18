@@ -1,6 +1,9 @@
 #include <sensor.h>
 
-Sensors::Sensors():cds(FEHIO::P0_0){}
+Sensors::Sensors():
+    cds(FEHIO::P0_0), 
+    opto(FEHIO::P0_7),
+    bump(FEHIO::P1_0){}
 
 double Sensors::getRawColor(){
     return cds.Value();
@@ -27,4 +30,14 @@ int Sensors::isLight(){
 
 int Sensors::isRed(){
     return cds.Value() < RED_THRESHOLD;
+}
+
+int Sensors::onLine()
+{
+    return opto.Value() > LINE_THRESHOLD;
+}
+
+int Sensors::getBump()
+{
+    return !bump.Value();
 }
