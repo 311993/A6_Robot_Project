@@ -10,6 +10,7 @@ using namespace std;
 #define RK 0
 #define LK 0
 #define SPD 50
+#define MAX_VOLTAGE 11.7
 #define DEGREES_TO_MSEC 5000/447.0 * 390/315.0
 #define INCHES_TO_MSEC 10000/78.0
 

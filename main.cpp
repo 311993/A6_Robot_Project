@@ -19,14 +19,14 @@ int step = 0, timeStep = 0;
 long startTime = TimeNowMSec(), timeStamp = TimeNowMSec();
 
     int x = 0, y = 0;
-    /*while(!LCD.Touch(&x,&y)){
-        LCD.WriteLine(sensors.getRawColor());
+    while(!LCD.Touch(&x,&y)){
+        LCD.WriteLine(Battery.Voltage());//sensors.getRawColor());
         //sensors.sampleColor();
-    }*/
-    while(!sensors.isLight()){
+    }
+    /*while(!sensors.isLight()){
         //LCD.WriteLine(sensors.getRawColor());
         //Sleep(1);
-    }
+    }*/
 
     while(TimeNowMSec() - startTime < MAX_TIME){
         //LCD.WriteLine(Battery.Voltage());

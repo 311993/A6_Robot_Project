@@ -133,6 +133,6 @@ int Drivetrain::driveUntilLine(){
 }
 
 void Drivetrain::drivePrimitive(double lSpd, double rSpd){
-    motorL.SetPercent(-1*(lSpd*LP + LK));
-    motorR.SetPercent((rSpd*RP + RK));
+    motorL.SetPercent(-1*(lSpd*LP + LK)*(MAX_VOLTAGE/Battery.Voltage()));
+    motorR.SetPercent((rSpd*RP + RK)*(MAX_VOLTAGE/Battery.Voltage()));
 }
