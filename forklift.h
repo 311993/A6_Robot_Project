@@ -17,7 +17,7 @@ class Forklift{
     Forklift(Sensors sensors);
     int toTop();
     int toBot();
-    int hold(int time, bool hasLug);
+    int hold(bool hasLug);
     int stop();
   private:  
     void liftPrimitive(double pow);

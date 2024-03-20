@@ -41,7 +41,7 @@ int Forklift::toBot(){
     return 0;
 }
 
-int Forklift::hold(int time, bool hasLug){
+int Forklift::hold(bool hasLug){
     liftPrimitive(hasLug ? FF_POW_LUG : FF_POW);
 }
 

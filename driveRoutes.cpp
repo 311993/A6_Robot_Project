@@ -6,6 +6,30 @@ DriveRoutes::DriveRoutes(Drivetrain drivetrain):
     subTimeStamp(0),
     color(0){}
 
+int DriveRoutes::startToLevers(int leverNo){
+    switch(substep){
+        case 0:
+            substep += drivetrain.driveDistance(12);
+        break;
+
+        case 1:
+            substep += drivetrain.turnLeft(45);
+        break;
+
+        case 2:
+            substep += drivetrain.driveDistance(6 + leverNo * 4);
+        break;
+
+        case 3:
+            substep += drivetrain.turnLeft(90);
+            return 2;
+        break;
+
+    }
+
+    return 1;
+}
+
 int DriveRoutes::lightToKiosk(){
     switch(substep){
         case 0:

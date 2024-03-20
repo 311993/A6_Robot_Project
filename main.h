@@ -10,6 +10,7 @@ using namespace std;
 class DriveRoutes{
   public:
     DriveRoutes(Drivetrain drivetrain);
+    int startToLevers(int leverNo);
     int startToKiosk();
     int startToUpper();
     int findLight();
@@ -26,6 +27,8 @@ private:
 
 class TaskSequences{
   public:
+    TaskSequences(Drivetrain drivetrain, Forklift forklift);
+    int fuelLever();
   private:  
     Drivetrain drivetrain;
     Forklift forklift;
