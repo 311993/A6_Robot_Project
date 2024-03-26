@@ -26,6 +26,7 @@ class Drivetrain{
     int driveUntilLine();
     int driveUntilBump();
     int stop(void);
+    int manageTime(double mSec);
     void drivePrimitive(double rlSpd, double rSpd);
     Drivetrain(Sensors sensors);
     

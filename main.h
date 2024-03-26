@@ -28,8 +28,10 @@ private:
 class TaskSequences{
   public:
     TaskSequences(Drivetrain drivetrain, Forklift forklift);
+    int stampPassport();
     int fuelLever();
-  private:  
+
+private:  
     Drivetrain drivetrain;
     Forklift forklift;
     int substep = 0;

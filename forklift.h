@@ -6,13 +6,13 @@
 
 using namespace std;
 
-#define MSEC_BOT_TO_TOP 577
-#define MSEC_BOT_TO_MID 321
-#define MSEC_TOP_TO_BOT 500
-#define MSEC_TOP_TO_MID 222
-#define MSEC_MID_TO_BOT 278
-#define MSEC_MID_TO_TOP 256
-#define LIFT_POW 50
+#define MSEC_BOT_TO_TOP 5000/3.75 *2.8
+#define MSEC_BOT_TO_MID 5000/3.75 * 2.1
+#define MSEC_TOP_TO_BOT 5000/3.75 * 2.8
+#define MSEC_TOP_TO_MID 5000/3.75 * .7
+#define MSEC_MID_TO_BOT 5000/3.75 * 2.1
+#define MSEC_MID_TO_TOP 5000/3.75 * .7
+#define LIFT_POW 30
 #define FF_POW 2
 #define FF_POW_LUG 5
 #define MAX_VOLTAGE 11.7
@@ -27,10 +27,11 @@ class Forklift{
     int midToTop();
     int midToBot();
 
+    void liftPrimitive(double pow);
+
     int hold(bool hasLug);
     int stop();
   private:  
-    void liftPrimitive(double pow);
     FEHMotor lift;
     Sensors sensors;
     long timeStamp;
