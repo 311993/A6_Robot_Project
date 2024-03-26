@@ -31,7 +31,7 @@ int Forklift::topToBot(){
         timeStamp = TimeNowMSec();
     }
 
-    liftPrimitive(LIFT_POW);
+    liftPrimitive(-LIFT_POW);
 
     if(TimeNowMSec() - timeStamp > MSEC_TOP_TO_BOT){
        timeStamp = 0;
@@ -46,7 +46,7 @@ int Forklift::topToMid(){
         timeStamp = TimeNowMSec();
     }
 
-    liftPrimitive(LIFT_POW);
+    liftPrimitive(-LIFT_POW);
 
     if(TimeNowMSec() - timeStamp > MSEC_TOP_TO_MID){
        timeStamp = 0;
@@ -91,7 +91,7 @@ int Forklift::midToBot(){
         timeStamp = TimeNowMSec();
     }
 
-    liftPrimitive(LIFT_POW);
+    liftPrimitive(-LIFT_POW);
 
     if(TimeNowMSec() - timeStamp > MSEC_MID_TO_BOT){
        timeStamp = 0;

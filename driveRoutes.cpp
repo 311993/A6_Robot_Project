@@ -21,7 +21,10 @@ int DriveRoutes::startToLevers(int leverNo){
         break;
 
         case 3:
-            substep += drivetrain.turnLeft(90);
+            substep += drivetrain.turnLeft(70);
+        break;
+        case 4:
+            drivetrain.stop();
             return 2;
         break;
 

@@ -14,6 +14,19 @@ int Drivetrain::stop(void){
     return 1;
 }
 
+int Drivetrain::manageTime(double mSec){
+    if(timeStamp == 0){
+        timeStamp = TimeNowMSec();
+    }
+
+    if(TimeNowMSec() - timeStamp > mSec){
+       timeStamp = 0;
+       return stop();
+    }
+
+    return
+}
+
 int Drivetrain::driveUnbounded(){
     drivePrimitive(SPD, SPD);
 
@@ -23,78 +36,35 @@ int Drivetrain::driveUnbounded(){
 int Drivetrain::wait(double mSec){
     stop();
 
-     if(timeStamp == 0){
-        timeStamp = TimeNowMSec();
-    }
-
-    if(TimeNowMSec() - timeStamp > mSec){
-       timeStamp = 0;
-       return stop();
-    }
+    return manageTime(mSec);
 }
 
 int Drivetrain::driveDistance(double dist){
 
-    if(timeStamp == 0){
-        timeStamp = TimeNowMSec();
-    }
-
     drivePrimitive(SPD, SPD);
 
-    if(TimeNowMSec() - timeStamp > dist*INCHES_TO_MSEC){
-       timeStamp = 0;
-       return stop();
-    }
-
-    return 0;
+    return manageTime(dist*INCHES_TO_MSEC);
 }
 
 int Drivetrain::driveBack(double dist){
 
-    if(timeStamp == 0){
-        timeStamp = TimeNowMSec();
-    }
-
     drivePrimitive(-SPD, -SPD);
 
-    if(TimeNowMSec() - timeStamp > dist*INCHES_TO_MSEC){
-       timeStamp = 0;
-       return stop();
-    }
-
-    return 0;
+    return manageTime(dist*INCHES_TO_MSEC);
 }
 
 int Drivetrain::turnLeft(double deg){
-    
-    if(timeStamp == 0){
-        timeStamp = TimeNowMSec();
-    }
 
     drivePrimitive(-SPD, SPD);
 
-    if(TimeNowMSec() - timeStamp > deg*DEGREES_TO_MSEC){
-       timeStamp = 0;
-       return stop();
-    }
-
-    return 0;
+    return manageTime(deg*DEGREES_TO_MSEC);
 }
 
 int Drivetrain::turnRight(double deg){
-    
-    if(timeStamp == 0){
-        timeStamp = TimeNowMSec();
-    }
 
     drivePrimitive(SPD, -SPD);
 
-    if(TimeNowMSec() - timeStamp > deg*DEGREES_TO_MSEC){
-        timeStamp = 0;
-       return stop();
-    }
-
-    return 0;
+    return manageTime(deg*DEGREES_TO_MSEC);
 }
 
 int Drivetrain::driveUntilBump(){
