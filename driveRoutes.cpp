@@ -6,6 +6,110 @@ DriveRoutes::DriveRoutes(Drivetrain drivetrain):
     subTimeStamp(0),
     color(0){}
 
+int DriveRoutes::startToLuggage(){
+    switch(substep){
+        case 0:
+            substep += drivetrain.driveTime(-15, 2100); 
+        break;
+
+        case 1:
+            substep += drivetrain.driveDistance(12.5);
+        break;
+
+        case 2:
+            substep += drivetrain.turnRight(45);
+        break;
+
+        case 3:
+            substep += drivetrain.driveDistance(14);
+        break;
+
+        case 4:
+            substep += drivetrain.driveBack(3);
+        break;
+
+        case 5:
+            substep += drivetrain.driveTime(100, 500);
+        break;
+
+        case 6:
+            substep += drivetrain.driveBack(3);
+        break;
+
+        case 7:
+            substep += drivetrain.driveTime(100, 500);
+        break;
+
+        case 8:
+            drivetrain.stop();
+            substep = 0;
+            return 2;
+        break;
+
+    }
+
+    return 1;
+}
+
+int DriveRoutes::luggageToFinal(){
+    switch(substep){
+        case 0:
+            substep += drivetrain.driveBack(12);
+        break;
+
+        case 1:
+            substep += drivetrain.turnLeft(40);
+        break;
+
+        case 2:
+            substep += drivetrain.driveBack(18);
+        break;
+
+        case 3:
+            drivetrain.stop();
+            substep = 0;
+            return 3;
+        break;
+
+    }
+
+    return 2;
+}
+
+int DriveRoutes::upperToPassport(){
+    switch(substep){
+
+        case 0:
+            substep += drivetrain.turnLeft(90);
+        break;
+
+        case 1:
+            substep += drivetrain.driveDistance(5);
+        break;
+
+        case 2:
+            substep += drivetrain.turnRight(91);
+        break;
+
+        case 3:
+            substep += drivetrain.driveDistance(15);
+        break;
+
+        case 4:
+            substep += drivetrain.turnRight(90);
+        break;
+
+        case 5:
+            drivetrain.stop();
+            substep = 0;
+            return 3;
+        break;
+
+    }
+
+    return 2;
+}
+
 int DriveRoutes::startToLevers(int leverNo){
     switch(substep){
         case 0:
@@ -25,6 +129,7 @@ int DriveRoutes::startToLevers(int leverNo){
         break;
         case 4:
             drivetrain.stop();
+            substep = 0;
             return 2;
         break;
 
@@ -114,10 +219,10 @@ int DriveRoutes::startToUpper(){
             substep += drivetrain.turnRight(55);
         break;
         case 1:
-            substep += drivetrain.driveDistance(5);
+            substep += drivetrain.driveDistance(6);
         break;
         case 2:
-            substep += drivetrain.turnLeft(17);
+            substep += drivetrain.turnLeft(18);
         break;
         case 3:
             substep += drivetrain.driveDistance(30);
@@ -125,6 +230,7 @@ int DriveRoutes::startToUpper(){
     }
 
     if(substep == 4){
+        drivetrain.stop();
         substep = 0;
         return 2;
     }

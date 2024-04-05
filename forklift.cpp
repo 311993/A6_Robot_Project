@@ -1,9 +1,27 @@
 #include <forklift.h>
+#include <cmath>
 
 Forklift::Forklift(Sensors sensors):
     lift(FEHMotor::Motor2, 7.2),
     sensors(sensors),
+    angle(0),
     timeStamp(0){}
+
+int Forklift::setPos(double theta){
+    if(timeStamp == 0){
+        timeStamp = TimeNowMSec();
+    }
+
+    liftPrimitive(theta > angle ? LIFT_POW : - LIFT_POW);
+
+    if(TimeNowMSec() - timeStamp > abs(theta - angle)*DEGREES_TO_MSEC){
+       timeStamp = 0;
+       angle = theta;
+       return stop();
+    }
+
+    return 0;
+}
 
 int Forklift::stop(){
     lift.SetPercent(0);

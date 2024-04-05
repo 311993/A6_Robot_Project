@@ -8,47 +8,45 @@ TaskSequences::TaskSequences(Drivetrain drivetrain, Forklift forklift):
 
 int TaskSequences::stampPassport(){
     switch(substep){
+
         case 0:
-            substep += drivetrain.driveDistance(8);
+            substep += drivetrain.turnLeft(90);
         break;
 
         case 1:
-            substep += drivetrain.turnLeft(70);
+            substep += drivetrain.driveDistance(8);
         break;
 
         case 2:
-            substep += drivetrain.driveDistance(6);
+            substep += drivetrain.turnRight(91);
         break;
 
         case 3:
-            substep += drivetrain.turnRight(80);
-        break;
-
-        case 4:
-            substep += drivetrain.driveDistance(9);
-        break;
-
-        case 5:
-            substep += drivetrain.turnRight(70);
-        break;
-
-        case 6:
             substep += drivetrain.driveDistance(6);
         break;
 
-        case 7:
+        case 4:
+            substep += drivetrain.turnRight(30);
+        break;
+
+        case 5:
+            substep += drivetrain.driveDistance(8);
+        break;
+
+        case 6:
+            drivetrain.drivePrimitive(15, 15);
             substep += forklift.botToTop();
         break;
 
-        case 8:
+        case 7:
             substep += forklift.topToBot();
         break;
 
-        case 9:
+        case 8:
             substep += drivetrain.driveBack(5);
         break;
 
-        case 10:
+        case 9:
             drivetrain.stop();
             forklift.stop();
             return 3;

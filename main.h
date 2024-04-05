@@ -10,6 +10,9 @@ using namespace std;
 class DriveRoutes{
   public:
     DriveRoutes(Drivetrain drivetrain);
+    int startToLuggage();
+    int luggageToFinal();
+    int upperToPassport();
     int startToLevers(int leverNo);
     int startToKiosk();
     int startToUpper();
