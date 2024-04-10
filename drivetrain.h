@@ -30,7 +30,7 @@ class Drivetrain{
     int turnRight(double deg);
     int followLine();
     int driveUntilLine();
-    int driveUntilBump();
+    int align();
     int stop(void);
     int breakTime(double mSec);
     int breakEnc(double ticks);

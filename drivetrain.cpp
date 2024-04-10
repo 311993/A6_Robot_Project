@@ -104,10 +104,18 @@ int Drivetrain::turnRight(double deg){
     return useEnc ? breakEnc(deg*DEGREES_TO_TICKS) : breakTime(deg*DEGREES_TO_MSEC);
 }
 
-int Drivetrain::driveUntilBump(){
-    drivePrimitive(SPD, SPD);
+int Drivetrain::align(){
+    drivePrimitive(-SPD, -SPD);
 
-    if(sensors.getBump()){
+    if(sensors.getBumpL()){
+       motorL.Stop();
+    }
+
+    if(sensors.getBumpR()){
+        motorR.Stop();
+    }
+
+    if(sensors.getBumpL() && sensors.getBumpR()){
         timeStamp = 0;
         return stop();
     }

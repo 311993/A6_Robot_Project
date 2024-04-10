@@ -3,7 +3,9 @@
 Sensors::Sensors():
     cds(FEHIO::P0_0), 
     opto(FEHIO::P0_7),
-    bump(FEHIO::P1_0){}
+    bumpL(FEHIO::P3_0),
+    bumpR(FEHIO::P3_7),
+    bumpF(FEHIO::P3_6){}
 
 double Sensors::getRawColor(){
     return cds.Value();
@@ -37,7 +39,17 @@ int Sensors::onLine()
     return opto.Value() > LINE_THRESHOLD;
 }
 
-int Sensors::getBump()
+int Sensors::getBumpL()
 {
-    return !bump.Value();
+     return !bumpL.Value();
+}
+
+int Sensors::getBumpR()
+{
+     return !bumpR.Value();
+}
+
+int Sensors::getBumpF(){
+
+    return !bumpF.Value();
 }

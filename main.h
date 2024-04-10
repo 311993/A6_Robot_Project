@@ -1,5 +1,5 @@
 #pragma once
-#include <forklift.h>
+#include <mech.h>
 #include <drivetrain.h>
 #include <sensor.h>
 #include <FEHLCD.h>
@@ -11,15 +11,10 @@ class DriveRoutes{
   public:
     DriveRoutes(Drivetrain drivetrain);
     int startToLuggage();
-    int luggageToFinal();
-    int upperToPassport();
-    int startToLevers(int leverNo);
-    int startToKiosk();
-    int startToUpper();
-    int findLight();
-    int upperToLight();
-    int lightToKiosk();
-    int kioskToStart();
+    int luggageToLevers(int leverNo);
+    int leversToKiosk();
+    int kioskToPassport();
+    int passportToFinal();
     int color; //1 = red, 0 = blue
 
 private:
@@ -30,13 +25,13 @@ private:
 
 class TaskSequences{
   public:
-    TaskSequences(Drivetrain drivetrain, Forklift forklift);
+    TaskSequences(Drivetrain drivetrain, Arm forklift);
     int stampPassport();
-    int fuelLever();
+    int fuelLever(int leverNo);
 
 private:  
     Drivetrain drivetrain;
-    Forklift forklift;
+    Arm forklift;
     int substep = 0;
     long subTimeStamp = 0;
 };

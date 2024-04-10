@@ -23,11 +23,16 @@ class Sensors{
         int isRed();
 
         int onLine();
-        int getBump();
+
+        int getBumpL();
+        int getBumpR();
+        int getBumpF();
 
     private:
         double colorSamples[5];
         AnalogInputPin cds;
         AnalogInputPin opto;
-        DigitalInputPin bump;
+        DigitalInputPin bumpL;
+        DigitalInputPin bumpR;
+        DigitalInputPin bumpF;
 };

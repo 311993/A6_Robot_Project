@@ -1,6 +1,6 @@
 #include <main.h>
 
-TaskSequences::TaskSequences(Drivetrain drivetrain, Forklift forklift):
+TaskSequences::TaskSequences(Drivetrain drivetrain, Arm forklift):
     drivetrain(drivetrain),
     forklift(forklift),
     substep(0),
@@ -10,104 +10,70 @@ int TaskSequences::stampPassport(){
     switch(substep){
 
         case 0:
-            substep += drivetrain.turnLeft(90);
+            substep += forklift.setPos(90);
         break;
 
         case 1:
-            substep += drivetrain.driveDistance(8);
+            substep += drivetrain.driveDistance(3);
         break;
 
         case 2:
-            substep += drivetrain.turnRight(91);
+            substep += forklift.reset();
         break;
 
         case 3:
-            substep += drivetrain.driveDistance(6);
-        break;
-
-        case 4:
-            substep += drivetrain.turnRight(30);
-        break;
-
-        case 5:
-            substep += drivetrain.driveDistance(8);
-        break;
-
-        case 6:
-            drivetrain.drivePrimitive(15, 15);
-            substep += forklift.botToTop();
-        break;
-
-        case 7:
-            substep += forklift.topToBot();
-        break;
-
-        case 8:
-            substep += drivetrain.driveBack(5);
-        break;
-
-        case 9:
             drivetrain.stop();
             forklift.stop();
-            return 3;
+            return 1;
         break;
 
     }
 
-    return 2;
+    return 0;
 }
 
-int TaskSequences::fuelLever(){
+int TaskSequences::fuelLever(int leverNo){
     switch(substep){
         case 0:
-            substep += forklift.botToTop();
+            substep += forklift.setPos(90);
         break;
 
         case 1:
-            substep += drivetrain.driveDistance(3.5);
-            forklift.hold(0);
+            substep += drivetrain.driveBack(3);
         break;
 
         case 2:
-            substep += forklift.topToMid();
+            substep += forklift.reset();
         break;
 
         case 3:
-            substep += drivetrain.driveBack(3.5);
+            //Sleep(5.0);
+            substep++;
         break;
 
         case 4:
-            substep += forklift.midToBot();
+            substep += drivetrain.driveDistance(3);
         break;
 
         case 5:
-            Sleep(6.0);
-            substep ++;
+            substep += forklift.setPos(0);
         break;
 
         case 6:
-            substep += drivetrain.driveDistance(3.5);
+            substep += drivetrain.driveDistance(10.5 - 4 * leverNo);
         break;
 
         case 7:
-            substep += forklift.botToTop();
+            substep += forklift.reset();
         break;
 
         case 8:
-            substep += drivetrain.driveBack(3.5);
-        break;
-
-        case 9:
-            substep += forklift.topToBot();
-        break;
-
-        case 10:
             drivetrain.stop();
             forklift.stop();
-            return 3;
+            return 1;
         break;
 
     }
 
-    return 2;
+    return 0;
 }
