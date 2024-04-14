@@ -25,6 +25,8 @@ int Drivetrain::stop(void){
     motorL.SetPercent(0);
     motorR.SetPercent(0);
 
+    Sleep(20);
+
     return 1;
 }
 
@@ -94,25 +96,25 @@ int Drivetrain::turnLeft(double deg){
 
     drivePrimitive(-SPD, SPD);
 
-    return useEnc ? breakEnc(deg*DEGREES_TO_TICKS * LTURNP) : breakTime(deg*DEGREES_TO_MSEC);
+    return useEnc ? breakEnc(deg*DEGREES_TO_TICKS_L) : breakTime(deg*DEGREES_TO_MSEC);
 }
 
 int Drivetrain::turnRight(double deg){
 
     drivePrimitive(SPD, -SPD);
 
-    return useEnc ? breakEnc(deg*DEGREES_TO_TICKS) : breakTime(deg*DEGREES_TO_MSEC);
+    return useEnc ? breakEnc(deg*DEGREES_TO_TICKS_R) : breakTime(deg*DEGREES_TO_MSEC);
 }
 
 int Drivetrain::align(){
-    drivePrimitive(-SPD, -SPD);
+    drivePrimitive(-20, -20);
 
     if(sensors.getBumpL()){
-       motorL.Stop();
+       drivePrimitive(0, -50);
     }
 
     if(sensors.getBumpR()){
-        motorR.Stop();
+        drivePrimitive(-50, 0);
     }
 
     if(sensors.getBumpL() && sensors.getBumpR()){

@@ -14,6 +14,8 @@ const char *teamKey = "A6TTeNLB5";
 int initialize();
 int calibrate();
 int manualMech();
+int testLevers();
+int testPassport();
 
 int main(void){
 
@@ -22,7 +24,9 @@ int main(void){
 
     //manualMech();
     //calibrate();
-    //initialize();
+    initialize();
+    //testLevers();
+    //testPassport();
 
     int x = 0, y = 0;
     /*while(!LCD.Touch(&x,&y)){
@@ -86,44 +90,6 @@ int main(void){
 
 int initialize(){
     RCS.InitializeTouchMenu(teamKey);
-    leverNo = RCS.GetCorrectLever();
+    leverNo = 0;//RCS.GetCorrectLever();
     return 1;
-}
-
-int calibrate(){
-    int x = 0, y = 0;
-
-        while(!LCD.Touch(&x,&y)){}
-    while(!arm.setPos(-90)){}
-        while(!LCD.Touch(&x,&y)){}
-    while(!arm.setPos(90)){}
-        while(!LCD.Touch(&x,&y)){}
-    while(!arm.setPos(0)){}
-        while(true){}
-
-        while(!LCD.Touch(&x,&y)){}
-    while(!drivetrain.driveDistance(12*9)){drivetrain.printEncs();}
-        while(!LCD.Touch(&x,&y)){}
-    while(!drivetrain.turnLeft(360)){drivetrain.printEncs();}
-        while(!LCD.Touch(&x,&y)){}
-    while(!drivetrain.turnRight(360)){drivetrain.printEncs();}
-        while(true){}
-}
-
-int manualMech(){
-    int x = 0, y = 0;
-    LCD.Clear();
-    LCD.WriteAt('L', 80, 120);
-    LCD.WriteAt('R', 240, 120);
-
-    while(true){
-
-        if(LCD.Touch(&x, &y)){
-            arm.liftPrimitive( x > 160 ? 50 : -50);
-        }else{
-            arm.liftPrimitive(0);
-        }
-
-        Sleep(20);
-    }
 }

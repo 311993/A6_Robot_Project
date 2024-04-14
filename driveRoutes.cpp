@@ -13,7 +13,7 @@ int DriveRoutes::startToLuggage(){
         break;
 
         case 1:
-            substep += drivetrain.driveDistance(11.5); //12.5
+            substep += drivetrain.driveDistance(12.4); //12.5
         break;
 
         case 2:
@@ -47,14 +47,26 @@ int DriveRoutes::luggageToLevers(int leverNo){
         break;
 
         case 1:
-            substep += drivetrain.turnRight(90);
+            substep += drivetrain.turnLeft(202);
         break;
 
         case 2:
-            substep += drivetrain.driveDistance(11.5 + leverNo * 4);
+            substep += drivetrain.align();
         break;
 
         case 3:
+            substep += drivetrain.driveDistance(8);
+        break;
+
+        case 4:
+            substep += drivetrain.turnLeft(93);
+        break;
+        
+        case 5:
+            substep += drivetrain.driveBack(9.1 + leverNo * 4);
+        break;
+
+        case 6:
             drivetrain.stop();
             substep = 0;
             return 1;
@@ -69,15 +81,15 @@ int DriveRoutes::leversToKiosk(){
 
      switch(substep){
         case 0:
-            substep += drivetrain.turnRight(180);
+            substep++;
         break;
 
         case 1:
-            substep += drivetrain.align();
+            substep ++;
         break;
 
         case 2:
-            substep += drivetrain.driveDistance(4);
+            substep += drivetrain.driveDistance(3);
         break;
 
         case 3:
@@ -85,11 +97,11 @@ int DriveRoutes::leversToKiosk(){
         break;
 
         case 4:
-            substep += drivetrain.driveDistance(12);
+            substep += drivetrain.driveDistance(27);
         break;
 
         case 5:
-            substep += drivetrain.turnLeft(90);
+            substep += drivetrain.turnRight(100);
         break;
 
         case 6:
@@ -97,22 +109,22 @@ int DriveRoutes::leversToKiosk(){
         break;
 
         case 7:
-            substep += drivetrain.driveDistance(12);
+            substep += drivetrain.driveDistance(19.25);
         break;
 
         case 8:
-            substep += drivetrain.turnLeft(90);
+            drivetrain.drivePrimitive(-SPD,0);
+            if(drivetrain.sensors.getBumpL()){
+                drivetrain.stop();
+                substep++;
+            };
         break;
 
         case 9:
-            substep += drivetrain.align();
+            substep += drivetrain.driveDistance(29);
         break;
 
         case 10:
-            substep += drivetrain.driveDistance(18);
-        break;
-
-        case 11:
             drivetrain.stop();
             substep = 0;
             return 1;
@@ -127,15 +139,15 @@ int DriveRoutes::kioskToPassport(){
 
     switch(substep){
         case 0:
-            substep += drivetrain.driveBack(6);
+            substep += drivetrain.driveBack(3.5);
         break;
 
         case 1:
-            substep += drivetrain.turnRight(90);
+            substep += drivetrain.turnRight(94);
         break;
 
         case 2:
-            substep += drivetrain.driveDistance(9);
+            substep += drivetrain.driveDistance(2);
         break;
 
         case 3:
@@ -154,19 +166,19 @@ int DriveRoutes::passportToFinal(){
     
     switch(substep){
         case 0:
-            substep += drivetrain.driveBack(6);
+            substep ++;
         break;
 
         case 1:
-            substep += drivetrain.turnRight(90);
+            substep += drivetrain.turnRight(95);
         break;
 
         case 2:
-            substep += drivetrain.driveDistance(12);
+            substep += drivetrain.driveDistance(15);
         break;
 
         case 3:
-            substep += drivetrain.turnRight(90);
+            substep += drivetrain.turnRight(95);
         break;
 
         case 4:
@@ -174,22 +186,18 @@ int DriveRoutes::passportToFinal(){
         break;
 
         case 5:
-            substep += drivetrain.turnRight(90);
+            substep += drivetrain.driveDistance(3);
         break;
 
         case 6:
-            substep += drivetrain.driveDistance(4);
+            substep += drivetrain.turnLeft(94);
         break;
 
         case 7:
-            substep += drivetrain.turnLeft(90);
-        break;
-
-        case 8:
             substep += drivetrain.driveUnbounded();
         break;
 
-        case 9:
+        case 8:
             drivetrain.stop();
             substep = 0;
             return 1;

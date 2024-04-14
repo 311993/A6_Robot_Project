@@ -5,7 +5,7 @@ Sensors::Sensors():
     opto(FEHIO::P0_7),
     bumpL(FEHIO::P3_0),
     bumpR(FEHIO::P3_7),
-    bumpF(FEHIO::P3_6){}
+    bumpF(FEHIO::P3_5){}
 
 double Sensors::getRawColor(){
     return cds.Value();

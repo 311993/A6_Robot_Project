@@ -12,9 +12,9 @@ int Arm::setPos(double theta){
         timeStamp = TimeNowMSec();
     }
 
-    liftPrimitive(theta > angle ? LIFT_POW : - LIFT_POW);
+    liftPrimitive(theta > angle ? -LIFT_POW : LIFT_POW);
 
-    if(TimeNowMSec() - timeStamp > abs(theta - angle)*DEGREES_TO_MSEC){
+    if(TimeNowMSec() - timeStamp > abs(theta - angle)*DEGREES_TO_MSEC || (theta < angle && sensors.getBumpF())){
        timeStamp = 0;
        angle = theta;
        return stop();
@@ -25,15 +25,21 @@ int Arm::setPos(double theta){
 
 int Arm::stop(){
     motorF.SetPercent(0);
-
+    Sleep(100);
     return 1;
 }
 
 int Arm::reset(){
 
-    liftPrimitive(-LIFT_POW);
+    if(timeStamp == 0){
+        timeStamp = TimeNowMSec();
+    }
 
-    if(sensors.getBumpF()){
+    liftPrimitive(LIFT_POW);
+
+    if(sensors.getBumpF() || (TimeNowMSec() - timeStamp) > 2000){
+        angle = 0;
+        timeStamp = 0;
         return stop();
     }
 

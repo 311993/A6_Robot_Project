@@ -14,8 +14,8 @@ using namespace std;
 #define DEGREES_TO_MSEC 5000/447.0 * 390/315.0
 #define INCHES_TO_MSEC 10000/78.0
 #define INCHES_TO_TICKS (24.0/25.0) * 48.0 * (108.0/109.0) / (2.75*3.14159)
-#define DEGREES_TO_TICKS (330.0/360.0) * 48.0 / (1.5*2.75*3.14159*9.5)
-#define LTURNP 333.0/360.0
+#define DEGREES_TO_TICKS_L  0.3625
+#define DEGREES_TO_TICKS_R  0.3750
 
 class Drivetrain{
   public:
@@ -36,6 +36,7 @@ class Drivetrain{
     int breakEnc(double ticks);
     void drivePrimitive(double lSpd, double rSpd);
     Drivetrain(Sensors sensors);
+    Sensors sensors;
 
     void printEncs();
 
@@ -44,7 +45,6 @@ private:
     FEHMotor motorR;
     DigitalEncoder encL;
     DigitalEncoder encR;
-    Sensors sensors;
     long timeStamp;
     const static bool useEnc = true;
 };
