@@ -7,31 +7,32 @@
 
 using namespace std;
 
-#define RED_THRESHOLD 0.6
-#define BLUE_THRESHOLD 1.0
-#define LINE_THRESHOLD 2.0
+//Define constants
+#define RED_THRESHOLD 0.6 //Max value for red light
+#define BLUE_THRESHOLD 1.0 //Max value for blue light
 
 class Sensors{
     public:
-        explicit Sensors();
+        explicit Sensors(); //Constructor
 
+        //CDS cell methods
         double getRawColor();
         double getAvgColor();
         void sampleColor();
-
         int isLight();
         int isRed();
 
-        int onLine();
-
+        //Bump switch methods
         int getBumpL();
         int getBumpR();
         int getBumpF();
 
     private:
-        double colorSamples[5];
+
+        double colorSamples[5]; //Color sample storage for averaging
+
+        //Required components
         AnalogInputPin cds;
-        AnalogInputPin opto;
         DigitalInputPin bumpL;
         DigitalInputPin bumpR;
         DigitalInputPin bumpF;

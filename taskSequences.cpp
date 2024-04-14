@@ -1,28 +1,37 @@
 #include <main.h>
 
-TaskSequences::TaskSequences(Drivetrain drivetrain, Arm forklift):
+//Constructor: initialize control variables + set up subsystem dependencies
+TaskSequences::TaskSequences(Drivetrain drivetrain, Arm arm):
     drivetrain(drivetrain),
-    forklift(forklift),
+    arm(arm),
     substep(0),
     subTimeStamp(0){}
 
+//Subsequence for passport task
 int TaskSequences::stampPassport(){
+
+    //Execute command based on robot substate,
+    //Advance substate whenever a command is complete
+
     switch(substep){
 
+        //Position arm and move in for stamp
         case 0:
-            substep += forklift.setPos(120);
+            substep += arm.setPos(120);
         break;
 
         case 1:
             substep += drivetrain.driveDistance(4);
         break;
 
+        //Stamp passport
         case 2:
-            substep += forklift.reset();
+            substep += arm.reset();
         break;
 
+        //Move out from passport + reset arm
         case 3:
-            substep += forklift.setPos(60);
+            substep += arm.setPos(60);
         break;
 
         case 4:
@@ -30,33 +39,46 @@ int TaskSequences::stampPassport(){
         break;
 
         case 5:
-            substep += forklift.reset();
+            substep += arm.reset();
         break;
 
-        case 6:
+        //End subsequence
+        case 6: 
+
+            //Stop all motors + reset control vars
             drivetrain.stop();
-            forklift.stop();
+            arm.stop();
             substep = 0;
-            return 1;
+           
+            return 1; //Advance main state
+        
         break;
 
     }
 
-    return 0;
+    return 0; //Maintain main state
 }
 
+//Subsequence for fuel lever task
 int TaskSequences::fuelLever(int leverNo){
+
+    //Execute command based on robot substate,
+    //Advance substate whenever a command is complete
+
     switch(substep){
+
+        //Flip lever down
         case 0:
-            substep += forklift.reset();
+            substep += arm.reset();
         break;
 
         case 1:
-            substep += forklift.setPos(140);
+            substep += arm.setPos(140);
         break;
 
+        //Drive back + position for flip up
         case 2:
-            substep += forklift.reset();
+            substep += arm.reset();
         break;
 
         case 3:
@@ -64,42 +86,50 @@ int TaskSequences::fuelLever(int leverNo){
         break;
 
         case 4:
-            substep += forklift.setPos(110);
+            substep += arm.setPos(110);
         break;
 
+        //Wait for bonus pts
         case 5:
             Sleep(5.0);
             substep++;
         break;
 
+        //Flip lever up
         case 6:
             substep += drivetrain.driveBack(3.5);
         break;
 
         case 7:
-            substep += forklift.setPos(0);
+            substep += arm.setPos(0);
         break;
 
         case 8:
-            substep += forklift.setPos(30);
+            substep += arm.setPos(30);
         break;
 
+        //Align with wall near levers + reset arm position
         case 9:
             substep += drivetrain.align();
         break;
 
         case 10:
-            substep += forklift.reset();
+            substep += arm.reset();
         break;
 
+        //End subsequence
         case 11:
+            
+            //Stop all motors + reset control vars
             drivetrain.stop();
-            forklift.stop();
+            arm.stop();
             substep = 0;
-            return 1;
+           
+            return 1; //Advance main state
+        
         break;
 
     }
 
-    return 0;
+    return 0; //Maintain main state
 }
